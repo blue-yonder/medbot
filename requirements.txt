@@ -1,0 +1,9 @@
+ipython
+pyzmq
+jinja2
+tornado
+jsonschema
+terminado
+pygments
+mistune
+
