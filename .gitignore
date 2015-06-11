@@ -57,5 +57,4 @@ docs/_build/
 target/
 
 # Custom
-medbot.slides.html
 .ipynb_checkpoints/*
