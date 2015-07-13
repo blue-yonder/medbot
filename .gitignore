@@ -58,3 +58,5 @@ target/
 
 # Custom
 .ipynb_checkpoints/*
+src/oauth.cfg
+.idea/*
