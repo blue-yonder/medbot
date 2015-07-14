@@ -3,6 +3,10 @@
 
 """
     A chat bot based on SleekXMPP
+
+    Scope parameter is https://www.googleapis.com/auth/googletalk
+    Best is the generate the request with the OauthPlayground:
+    https://developers.google.com/oauthplayground/
 """
 
 from __future__ import absolute_import, division, print_function
@@ -15,8 +19,12 @@ from time import sleep
 
 from sleekxmpp import ClientXMPP
 from sleekxmpp.exceptions import IqError, IqTimeout
-from src.oauth import OAuth
+from oauth import OAuth
 
+
+__author__ = 'Florian Wilhelm'
+__copyright__ = 'Blue Yonder'
+__license__ = 'new BSD'
 
 _logger = logging.getLogger(__name__)
 
@@ -123,6 +131,7 @@ class MedBot(object):
         while not self.positive_reply:
             sleep(self.retry_sleep)
             if not self.ask_again():
+                self.curr_state = State.not_asked
                 break
 
     def ask_again(self):
@@ -141,7 +150,7 @@ class MedBot(object):
     def handle_message(self, msg):
         recipient_id = self.chat_client.get_recipient_id(self.recipient)
         from_recipient = msg['from'].full.startswith(recipient_id)
-        is_positive = msg['body'].lower().startswith('ja')
+        is_positive = msg['body'].lower().startswith('yes')
         was_asked = self.curr_state == State.asked
         if from_recipient and is_positive and was_asked:
             _logger.info("Positive reply received")

@@ -2,12 +2,28 @@
 
 from __future__ import print_function, absolute_import, division
 
+import sys
 import requests
-from ConfigParser import SafeConfigParser
+import urllib.parse
+
+try:
+    from configparser import SafeConfigParser
+except ImportError:
+    from ConfigParser import SafeConfigParser
 
 __author__ = 'Florian Wilhelm'
 __copyright__ = 'Blue Yonder'
 __license__ = 'new BSD'
+
+
+OAUTH2_SCOPES = {
+    'oauthlogin': 'https://www.google.com/accounts/OAuthLogin',
+    'googletalk': 'https://www.googleapis.com/auth/googletalk'
+}
+
+
+class OAuthError(Exception):
+    """Raised Exception when authentication fails."""
 
 
 class OAuth(object):
@@ -19,10 +35,14 @@ class OAuth(object):
 
     def from_cfg(self, filename):
         parser = SafeConfigParser()
-        parser.readfp(filename=filename)
+        with open(filename) as fh:
+            parser.readfp(fh)
         self.client_id = parser.get('credentials', 'client_id')
         self.client_secret = parser.get('credentials', 'client_secret')
-        self.refresh_token = parser.get('credentials', 'refresh_token')
+        if parser.has_option('credentials', 'refresh_token'):
+            token = parser.get('credentials', 'refresh_token').strip()
+            if token:
+                self.refresh_token = token
 
     @property
     def access_token(self):
@@ -33,3 +53,43 @@ class OAuth(object):
         resp = requests.post(self.url, data=params)
         resp.raise_for_status()
         return resp.json()["access_token"]
+
+    def get_authorize_scope_url(self, scope):
+        url = 'https://accounts.google.com/o/oauth2/auth?{}'.format(
+            urllib.parse.urlencode(dict(
+                client_id=self.client_id,
+                scope=scope,
+                redirect_uri='urn:ietf:wg:oauth:2.0:oob',
+                response_type='code',
+            )))
+        return url
+
+    def update_refresh_token(self, auth_code):
+        token_request_data = {
+            'client_id': self.client_id,
+            'client_secret': self.client_secret,
+            'code': auth_code,
+            'grant_type': 'authorization_code',
+            'redirect_uri': 'urn:ietf:wg:oauth:2.0:oob',
+        }
+        res = requests.post(self.url, data=token_request_data).json()
+
+        if 'error' in res:
+            raise OAuthError('Authorization error: \'{}\''.format(
+                res['error']))
+
+        self.refresh_token = res['refresh_token']
+        return self.refresh_token
+
+
+if __name__ == "__main__":
+    auth = OAuth()
+    auth.from_cfg('oauth.cfg')
+    if auth.refresh_token is None:
+        url = auth.get_authorize_scope_url(OAUTH2_SCOPES['oauthlogin'])
+        print("Open this website:\n"
+              "{}\n"
+              "Accept and post the code here:".format(url))
+        auth_code = sys.stdin.readline()
+        token = auth.update_refresh_token(auth_code)
+        print("Your token is:\n{}\nSave it in oauth.cfg".format(token))
