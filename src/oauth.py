@@ -73,7 +73,7 @@ class OAuth(object):
             'redirect_uri': 'urn:ietf:wg:oauth:2.0:oob',
         }
         res = requests.post(self.url, data=token_request_data).json()
-
+        print(res)
         if 'error' in res:
             raise OAuthError('Authorization error: \'{}\''.format(
                 res['error']))
@@ -86,7 +86,7 @@ if __name__ == "__main__":
     auth = OAuth()
     auth.from_cfg('oauth.cfg')
     if auth.refresh_token is None:
-        url = auth.get_authorize_scope_url(OAUTH2_SCOPES['oauthlogin'])
+        url = auth.get_authorize_scope_url(OAUTH2_SCOPES['googletalk'])
         print("Open this website:\n"
               "{}\n"
               "Accept and post the code here:".format(url))

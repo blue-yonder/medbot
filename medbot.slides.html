@@ -223,7 +223,7 @@ div.output_prompt {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="&quot;It's-about-time-to-take-your-medication!&quot;">"It's about time to take your medication!"<a class="anchor-link" href="#&quot;It's-about-time-to-take-your-medication!&quot;">&#182;</a></h1><h2 id="or-how-to-write-a-friendly-reminder-bot-;-)">or how to write a friendly reminder bot ;-)<a class="anchor-link" href="#or-how-to-write-a-friendly-reminder-bot-;-)">&#182;</a></h2><ul>
-<li>Florian Wilhelm</li>
+<li>Florian Wilhelm, Blue Yonder</li>
 <li>EuroPython 2015, Bilbao, Spain</li>
 <li><a href="https://github.com/blue-yonder/medbot/">https://github.com/blue-yonder/medbot/</a></li>
 </ul>
@@ -241,8 +241,8 @@ div.output_prompt {
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Outline">Outline<a class="anchor-link" href="#Outline">&#182;</a></h1><ul>
 <li>Motivation</li>
-<li>XMPP</li>
-<li>Event-Driven Programming</li>
+<li>XMPP/Hangups</li>
+<li>Event-Driven/Asynchronous Programming</li>
 <li>OAUTH2</li>
 <li>Credits</li>
 </ul>
@@ -258,7 +258,25 @@ div.output_prompt {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Motivation">Motivation<a class="anchor-link" href="#Motivation">&#182;</a></h1>
+<h1 id="Motivation">Motivation<a class="anchor-link" href="#Motivation">&#182;</a></h1><p>Why would anyone write a chat bot?</p>
+
+</div>
+</div>
+</div></section><section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Motivation">Motivation<a class="anchor-link" href="#Motivation">&#182;</a></h1><p>Learn about...</p>
+<ul>
+<li>the basics of chat protocols like XMPP</li>
+<li>the concepts of event-driven/asynchronous programming</li>
+<li>how to write a small Google App</li>
+<li>help a friend with diabetes</li>
+</ul>
+
 </div>
 </div>
 </div></section>
@@ -271,6 +289,8 @@ div.output_prompt {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="XMPP">XMPP<a class="anchor-link" href="#XMPP">&#182;</a></h1><ul>
+<li>Extensible Messaging and Presence Protocol based on XML</li>
+<li>developed by the Jabber open-source community in 1999 for near real-time instant messaging</li>
 <li>GTalk is based on XMPP but Hangout switched to a proprietary protocol</li>
 <li>Facebook provided an XMPP API until May, 2015</li>
 <li>AIM limited XMPP support</li>
@@ -303,7 +323,105 @@ div.output_prompt {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Event-driven-Programming">Event-driven Programming<a class="anchor-link" href="#Event-driven-Programming">&#182;</a></h1>
+<h1 id="Google-Hangouts-protocol">Google Hangouts protocol<a class="anchor-link" href="#Google-Hangouts-protocol">&#182;</a></h1><ul>
+<li>replaces Google Talk, Google+ Messenger and the Google+ video chat system</li>
+<li>proprietary protocol, cannot be integrated with multi-chat clients like Pidgin or Adium</li>
+<li>Some more features like photo messages and share location</li>
+<li>Python library: <a href="https://github.com/tdryer/hangups">hangups</a></li>
+</ul>
+
+</div>
+</div>
+</div></section><section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Hangups">Hangups<a class="anchor-link" href="#Hangups">&#182;</a></h1><ul>
+<li>by Tom Dryer, MIT licensed</li>
+<li>reverse-engineered the Hangouts protocol</li>
+<li>provides a basic command-line chatting client</li>
+<li>supports OAuth2 authentication as "iOS device"</li>
+<li>quite active, already some bots use it</li>
+<li><a href="https://github.com/tdryer/hangups">https://github.com/tdryer/hangups</a></li>
+</ul>
+
+</div>
+</div>
+</div></section>
+    </section><section>
+    <section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Event-driven-Programming">Event-driven Programming<a class="anchor-link" href="#Event-driven-Programming">&#182;</a></h1><blockquote><p>In an event-driven program, program flow is determined by external events. It is characterized by an <em>event loop</em> and the use of callback to trigger actions when events happen. - <strong>Jessica McKellar, Twisted Network Programming Essentials</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div><div class="fragment" data-fragment-index="9">
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>main loop listens for events and triggers <em>callback functions</em> (continuations) when one of these events is detected</li>
+<li>mostly single-threaded but multi-threaded architectures also exist</li>
+<li>can be blocking (synchronous) or non-blocking (asynchronous)</li>
+</ul>
+
+</div>
+</div>
+</div>
+    </div></section><section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Asynchronous-Programming">Asynchronous Programming<a class="anchor-link" href="#Asynchronous-Programming">&#182;</a></h1><blockquote><p>Asynchronous I/O, or non-blocking I/O is a form of input/output processing that permits other processing to continue before the transmission has finished - <strong>Wikipedia</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div><div class="fragment" data-fragment-index="11">
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>a form of cooperative multi-tasking</li>
+<li>concept can be implemented as an event loop</li>
+</ul>
+
+</div>
+</div>
+</div>
+    </div></section><section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="When-to-use-asynchronous-event-driven-programming?">When to use asynchronous event-driven programming?<a class="anchor-link" href="#When-to-use-asynchronous-event-driven-programming?">&#182;</a></h1><ul>
+<li>if you have many tasks</li>
+<li>your tasks are largely independent (no much inter-communication)</li>
+<li>some tasks block while waiting for I/O, events...</li>
+<li>your tasks share mutable data (that would need to be synced)</li>
+</ul>
+<p>Escpecially <em>network applications</em> and <em>user interfaces</em> have exactly these properties</p>
+
 </div>
 </div>
 </div></section><section>
@@ -339,7 +457,250 @@ div.output_prompt {
 
 </div>
 </div>
-</div></section>
+</div></section><section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Examples">Examples<a class="anchor-link" href="#Examples">&#182;</a></h1><p><strong>Task</strong>: Fetch some urls and check the elapsed time</p>
+<ol>
+<li>single-threaded</li>
+<li>multi-threaded</li>
+<li>asynchronous</li>
+</ol>
+
+</div>
+</div>
+</div></section><section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Single-threaded">Single-threaded<a class="anchor-link" href="#Single-threaded">&#182;</a></h1>
+</div>
+</div>
+</div><div class="fragment" data-fragment-index="18">
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="kn">import</span> <span class="nn">urllib</span><span class="o">,</span> <span class="nn">time</span><span class="o">,</span> <span class="nn">hashlib</span>
+
+<span class="n">hosts</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;http://www.scikit-learn.org&#39;</span><span class="p">,</span> <span class="s">&#39;http://www.numpy.org&#39;</span><span class="p">,</span> <span class="s">&#39;http://www.scipy.org&#39;</span><span class="p">,</span> <span class="s">&#39;http://pandas.pydata.org&#39;</span><span class="p">]</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">hosts</span><span class="p">:</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">host</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">url</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()[:</span><span class="mi">20</span><span class="p">],</span> <span class="n">host</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s">&quot;Elapsed time: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>b&apos;&lt;HTML&gt;\n&lt;HEAD&gt;\n  &lt;TIT&apos;
+b&apos;\n&lt;!DOCTYPE HTML PUBL&apos;
+b&apos;&lt;!DOCTYPE HTML&gt;\n\n&lt;HT&apos;
+b&apos;&lt;!DOCTYPE HTML PUBLI&apos;
+Elapsed time: 1.2403321266174316
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    </div></section><section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Multi-threaded">Multi-threaded<a class="anchor-link" href="#Multi-threaded">&#182;</a></h1>
+</div>
+</div>
+</div><div class="fragment" data-fragment-index="20">
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="k">def</span> <span class="nf">print_page</span><span class="p">(</span><span class="n">host</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">host</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">url</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()[:</span><span class="mi">20</span><span class="p">],</span> <span class="n">host</span><span class="p">)</span>
+
+<span class="c"># generate jobs</span>
+<span class="n">jobs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">hosts</span><span class="p">:</span>
+    <span class="n">jobs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">print_page</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">host</span><span class="p">,)))</span>
+    
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="c"># start jobs</span>
+<span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">jobs</span><span class="p">:</span>
+    <span class="n">job</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    
+<span class="c"># wait for jobs to finish</span>
+<span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">jobs</span><span class="p">:</span>
+    <span class="n">job</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s">&quot;Elapsed time: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>b&apos;\n&lt;!DOCTYPE HTML PUBL&apos; http://www.numpy.org
+b&apos;&lt;HTML&gt;\n&lt;HEAD&gt;\n  &lt;TIT&apos; http://www.scikit-learn.org
+b&apos;&lt;!DOCTYPE HTML&gt;\n\n&lt;HT&apos; http://www.scipy.org
+b&apos;&lt;!DOCTYPE HTML PUBLI&apos; http://pandas.pydata.org
+Elapsed time: 0.4711124897003174
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    </div></section><section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Asynchronous">Asynchronous<a class="anchor-link" href="#Asynchronous">&#182;</a></h1>
+</div>
+</div>
+</div><div class="fragment" data-fragment-index="22">
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c"># This code runs only with Python 2</span>
+<span class="kn">from</span> <span class="nn">twisted.internet</span> <span class="k">import</span> <span class="n">defer</span><span class="p">,</span> <span class="n">task</span>
+<span class="kn">from</span> <span class="nn">twisted.web.client</span> <span class="k">import</span> <span class="n">getPage</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">print_capitalized</span><span class="p">(</span><span class="n">txt</span><span class="p">,</span> <span class="n">host</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">txt</span><span class="o">.</span><span class="n">upper</span><span class="p">()[:</span><span class="mi">20</span><span class="p">],</span> <span class="n">host</span><span class="p">)</span>
+    
+<span class="k">def</span> <span class="nf">print_elapsed_time</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s">&quot;Elapsed time: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+    
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">react</span><span class="p">,</span> <span class="n">hosts</span><span class="p">):</span>
+    <span class="n">dlist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">hosts</span><span class="p">:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">getPage</span><span class="p">(</span><span class="n">host</span><span class="p">)</span>
+        <span class="n">d</span><span class="o">.</span><span class="n">addCallback</span><span class="p">(</span><span class="n">print_capitalized</span><span class="p">,</span> <span class="n">host</span><span class="p">)</span>
+        <span class="n">dlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">defer</span><span class="o">.</span><span class="n">gatherResults</span><span class="p">(</span><span class="n">dlist</span><span class="p">)</span><span class="o">.</span><span class="n">addCallback</span><span class="p">(</span><span class="n">print_elapsed_time</span><span class="p">)</span>
+
+<span class="n">task</span><span class="o">.</span><span class="n">react</span><span class="p">(</span><span class="n">main</span><span class="p">,</span> <span class="p">(</span><span class="n">hosts</span><span class="p">,))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+    </div><div style=display:none>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Elapsed time: 0.423393964767</p>
+
+</div>
+</div>
+</div>
+    </div><div class="fragment" data-fragment-index="22">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="What-should-our-MedBot-do?">What should our MedBot do?<a class="anchor-link" href="#What-should-our-MedBot-do?">&#182;</a></h1><p><img src="gfx/bot.png" alt="bot"></p>
+<ul>
+<li>notify a friend at 8pm about taking his long-acting insulin using Google Talk/Hangouts</li>
+<li>wait 20min for a reply then ask again, repeat this twice</li>
+<li>when message is retrieved check for "yes" and praise him, do nothing if no "yes"</li>
+<li>after having asked three times in total, i.e. 60min later, send give up message</li>
+</ul>
+
+</div>
+</div>
+</div>
+        </div></section><section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="gfx/state_machine.png" alt="state_machine"></p>
+
+</div>
+</div>
+</div></section><section>
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div><div class="fragment" data-fragment-index="22">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>It requires super human descipline to write readable code in callback and if you don't believe me look at any piece of JavaScript code - <strong>Guido van Rossum</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+        </div></section>
     </section><section>
     <section>
     
@@ -376,7 +737,14 @@ div.output_prompt {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><a href="https://developers.google.com/talk/jep_extensions/oauth">https://developers.google.com/talk/jep_extensions/oauth</a></p>
+<h1 id="How-to-use-it?">How to use it?<a class="anchor-link" href="#How-to-use-it?">&#182;</a></h1><ol>
+<li>create a project with the Google Developers Console</li>
+<li>give some details for the consent screen</li>
+<li>create OAuth client credentials (id and secret)</li>
+<li>request token for a scope</li>
+<li>get the user's consent to get authorization code</li>
+<li>exchange code for a token</li>
+</ol>
 
 </div>
 </div>
@@ -387,7 +755,7 @@ div.output_prompt {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="gfx/dev_console_projects.png" alt="Google Developers Console">
+<h1 id="Google-Developers-Console">Google Developers Console<a class="anchor-link" href="#Google-Developers-Console">&#182;</a></h1><p><img src="gfx/dev_console_projects.png" alt="Google Developers Console">
 <a href="https://console.developers.google.com/">https://console.developers.google.com/</a></p>
 
 </div>
@@ -399,7 +767,7 @@ div.output_prompt {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="gfx/dev_console_consent.png" alt=""></p>
+<h1 id="Consent-screen">Consent screen<a class="anchor-link" href="#Consent-screen">&#182;</a></h1><p><img src="gfx/authentication.png" alt="Consent Screen"></p>
 
 </div>
 </div>
@@ -410,7 +778,18 @@ div.output_prompt {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="gfx/dev_console_credentials.png" alt=""></p>
+<h1 id="Settings-for-Consent-screen">Settings for Consent screen<a class="anchor-link" href="#Settings-for-Consent-screen">&#182;</a></h1><p><img src="gfx/dev_console_consent.png" alt=""></p>
+
+</div>
+</div>
+</div></section><section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Settings-for-client-credentials">Settings for client credentials<a class="anchor-link" href="#Settings-for-client-credentials">&#182;</a></h1><p><img src="gfx/dev_console_credentials.png" alt=""></p>
 
 </div>
 </div>
@@ -432,7 +811,163 @@ div.output_prompt {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="gfx/dev_console_client_credentials.png" alt=""></p>
+<h1 id="Client-credentials">Client credentials<a class="anchor-link" href="#Client-credentials">&#182;</a></h1><p><img src="gfx/dev_console_client_credentials.png" alt=""></p>
+
+</div>
+</div>
+</div></section><section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Request-a-token-for-a-scope">Request a token for a scope<a class="anchor-link" href="#Request-a-token-for-a-scope">&#182;</a></h1><ul>
+<li>just form a GET request and let the user confirm</li>
+<li>use the scope for Google Talk (<a href="https://www.googleapis.com/auth/googletalk">https://www.googleapis.com/auth/googletalk</a>)</li>
+<li>get the user's consent and retrieve the authentication code</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment" data-fragment-index="38">
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="kn">import</span> <span class="nn">urllib</span>
+<span class="n">params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">client_id</span><span class="o">=</span><span class="s">&#39;10250...com&#39;</span><span class="p">,</span>
+              <span class="n">scope</span><span class="o">=</span><span class="s">&#39;https://www.googleapis.com/auth/googletalk&#39;</span><span class="p">,</span>
+              <span class="n">redirect_uri</span><span class="o">=</span><span class="s">&#39;urn:ietf:wg:oauth:2.0:oob&#39;</span><span class="p">,</span>
+              <span class="n">response_type</span><span class="o">=</span><span class="s">&#39;code&#39;</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">&#39;https://accounts.google.com/o/oauth2/auth?{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlencode</span><span class="p">(</span><span class="n">params</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+    </div></section><section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Consent-screen">Consent screen<a class="anchor-link" href="#Consent-screen">&#182;</a></h1><p><img src="gfx/authentication.png" alt="Consent Screen"></p>
+
+</div>
+</div>
+</div></section><section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Authentication-Code">Authentication Code<a class="anchor-link" href="#Authentication-Code">&#182;</a></h1><p><img src="gfx/authentication_code.png" alt="Authentication code"></p>
+
+</div>
+</div>
+</div></section><section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Exchange-code-for-token">Exchange code for token<a class="anchor-link" href="#Exchange-code-for-token">&#182;</a></h1><ul>
+<li>use the authentication code to form a POST request</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment" data-fragment-index="42">
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">client_id</span><span class="o">=</span><span class="s">&#39;10250...com&#39;</span><span class="p">,</span>
+              <span class="n">client_secret</span><span class="o">=</span><span class="s">&#39;qlEM...A6GQ&#39;</span><span class="p">,</span>
+              <span class="n">code</span><span class="o">=</span><span class="s">&#39;4/504...PM85&#39;</span><span class="p">,</span>
+              <span class="n">grant_type</span><span class="o">=</span><span class="s">&#39;authorization_code&#39;</span><span class="p">,</span>
+              <span class="n">redirect_uri</span><span class="o">=</span><span class="s">&#39;urn:ietf:wg:oauth:2.0:oob&#39;</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">&#39;https://www.googleapis.com/oauth2/v3/token&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+    </div><div style=display:none>
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">res</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;expires_in&#39;</span><span class="p">:</span> <span class="mi">3600</span><span class="p">,</span> <span class="s">&#39;access_token&#39;</span><span class="p">:</span> <span class="s">&#39;ya29.sEFNeZZcHIG-sdfelULRscbJmOoZ6F5HELsun_rEs15VASul_2g__2GPM0BH4Vs3Jgq&#39;</span><span class="p">,</span> <span class="s">&#39;token_type&#39;</span><span class="p">:</span> <span class="s">&#39;Bearer&#39;</span><span class="p">,</span> <span class="s">&#39;refresh_token&#39;</span><span class="p">:</span> <span class="s">&#39;1/GM3Bme7d8phaFRlnmKE3Gb_YwWdk9bDsqPI&amp;J-kxlHBIgOrIDttvn6zK6XiATCKT&#39;</span><span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+    </div><div class="fragment" data-fragment-index="44">
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="kn">import</span> <span class="nn">pprint</span>
+<span class="n">pp</span> <span class="o">=</span> <span class="n">pprint</span><span class="o">.</span><span class="n">PrettyPrinter</span><span class="p">()</span>
+<span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>{&apos;access_token&apos;: &apos;ya29.sEFNeZZcHIG-sdfelULRscbJmOoZ6F5HELsun_rEs15VASul_2g__2GPM0BH4Vs3Jgq&apos;,
+ &apos;expires_in&apos;: 3600,
+ &apos;refresh_token&apos;: &apos;1/GM3Bme7d8phaFRlnmKE3Gb_YwWdk9bDsqPI&amp;J-kxlHBIgOrIDttvn6zK6XiATCKT&apos;,
+ &apos;token_type&apos;: &apos;Bearer&apos;}
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    </div></section><section>
+    # That's it!
+* your app can use the access token to acces the API
+* store the refresh token to get new access tokens in the future</section>
+    </section><section>
+    <section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Thanks-for-your-attention">Thanks for your attention<a class="anchor-link" href="#Thanks-for-your-attention">&#182;</a></h1><p><img src="gfx/bot_waves.png" alt="Bot waves"></p>
 
 </div>
 </div>
