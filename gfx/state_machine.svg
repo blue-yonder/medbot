@@ -16,7 +16,10 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="state_machine.svg">
+   sodipodi:docname="state_machine.svg"
+   inkscape:export-filename="/home/fwilhelm/Sources/medbot/gfx/state_machine.png"
+   inkscape:export-xdpi="85.919609"
+   inkscape:export-ydpi="85.919609">
   <defs
      id="defs4">
     <marker
@@ -387,7 +390,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.3007953"
-     inkscape:cx="238.30426"
+     inkscape:cx="489.43356"
      inkscape:cy="526.37142"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
