@@ -488,7 +488,7 @@ div.output_prompt {
     
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="kn">import</span> <span class="nn">urllib</span><span class="o">,</span> <span class="nn">time</span><span class="o">,</span> <span class="nn">hashlib</span>
@@ -516,7 +516,7 @@ div.output_prompt {
 b&apos;\n&lt;!DOCTYPE HTML PUBL&apos; http://www.numpy.org
 b&apos;&lt;!DOCTYPE HTML&gt;\n\n&lt;HT&apos; http://www.scipy.org
 b&apos;&lt;!DOCTYPE HTML PUBLI&apos; http://pandas.pydata.org
-Elapsed time: 1.2799851894378662
+Elapsed time: 1.3736803531646729
 </pre>
 </div>
 </div>
@@ -540,7 +540,7 @@ Elapsed time: 1.2799851894378662
     
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="kn">import</span> <span class="nn">threading</span>
@@ -579,7 +579,7 @@ Elapsed time: 1.2799851894378662
 b&apos;&lt;HTML&gt;\n&lt;HEAD&gt;\n  &lt;TIT&apos; http://www.scikit-learn.org
 b&apos;&lt;!DOCTYPE HTML&gt;\n\n&lt;HT&apos; http://www.scipy.org
 b&apos;&lt;!DOCTYPE HTML PUBLI&apos; http://pandas.pydata.org
-Elapsed time: 0.4711124897003174
+Elapsed time: 0.5780215263366699
 </pre>
 </div>
 </div>
@@ -674,7 +674,7 @@ Elapsed time: 0.4711124897003174
     
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="kn">import</span> <span class="nn">asyncio</span>
@@ -707,32 +707,13 @@ Elapsed time: 0.4711124897003174
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansired">---------------------------------------------------------------------------</span>
-<span class="ansired">RuntimeError</span>                              Traceback (most recent call last)
-<span class="ansigreen">&lt;ipython-input-11-42cfeaadf551&gt;</span> in <span class="ansicyan">&lt;module&gt;</span><span class="ansiblue">()</span>
-<span class="ansigreen">     15</span> <span class="ansiyellow"></span>
-<span class="ansigreen">     16</span> loop <span class="ansiyellow">=</span> asyncio<span class="ansiyellow">.</span>get_event_loop<span class="ansiyellow">(</span><span class="ansiyellow">)</span><span class="ansiyellow"></span>
-<span class="ansigreen">---&gt; 17</span><span class="ansiyellow"> </span>loop<span class="ansiyellow">.</span>run_until_complete<span class="ansiyellow">(</span>asyncio<span class="ansiyellow">.</span>wait<span class="ansiyellow">(</span>tasks<span class="ansiyellow">)</span><span class="ansiyellow">)</span><span class="ansiyellow"></span>
-<span class="ansigreen">     18</span> <span class="ansiyellow"></span>
-<span class="ansigreen">     19</span> print<span class="ansiyellow">(</span><span class="ansiblue">&quot;Elapsed time: {}&quot;</span><span class="ansiyellow">.</span>format<span class="ansiyellow">(</span>time<span class="ansiyellow">.</span>time<span class="ansiyellow">(</span><span class="ansiyellow">)</span> <span class="ansiyellow">-</span> start<span class="ansiyellow">)</span><span class="ansiyellow">)</span><span class="ansiyellow"></span>
-
-<span class="ansigreen">/usr/lib64/python3.4/asyncio/base_events.py</span> in <span class="ansicyan">run_until_complete</span><span class="ansiblue">(self, future)</span>
-<span class="ansigreen">    251</span>         Return the Future<span class="ansired">&apos;</span>s result<span class="ansiyellow">,</span> <span class="ansigreen">or</span> <span class="ansigreen">raise</span> its exception<span class="ansiyellow">.</span><span class="ansiyellow"></span>
-<span class="ansigreen">    252</span>         &quot;&quot;&quot;
-<span class="ansigreen">--&gt; 253</span><span class="ansiyellow">         </span>self<span class="ansiyellow">.</span>_check_closed<span class="ansiyellow">(</span><span class="ansiyellow">)</span><span class="ansiyellow"></span>
-<span class="ansigreen">    254</span> <span class="ansiyellow"></span>
-<span class="ansigreen">    255</span>         new_task <span class="ansiyellow">=</span> <span class="ansigreen">not</span> isinstance<span class="ansiyellow">(</span>future<span class="ansiyellow">,</span> futures<span class="ansiyellow">.</span>Future<span class="ansiyellow">)</span><span class="ansiyellow"></span>
-
-<span class="ansigreen">/usr/lib64/python3.4/asyncio/base_events.py</span> in <span class="ansicyan">_check_closed</span><span class="ansiblue">(self)</span>
-<span class="ansigreen">    223</span>     <span class="ansigreen">def</span> _check_closed<span class="ansiyellow">(</span>self<span class="ansiyellow">)</span><span class="ansiyellow">:</span><span class="ansiyellow"></span>
-<span class="ansigreen">    224</span>         <span class="ansigreen">if</span> self<span class="ansiyellow">.</span>_closed<span class="ansiyellow">:</span><span class="ansiyellow"></span>
-<span class="ansigreen">--&gt; 225</span><span class="ansiyellow">             </span><span class="ansigreen">raise</span> RuntimeError<span class="ansiyellow">(</span><span class="ansiblue">&apos;Event loop is closed&apos;</span><span class="ansiyellow">)</span><span class="ansiyellow"></span>
-<span class="ansigreen">    226</span> <span class="ansiyellow"></span>
-<span class="ansigreen">    227</span>     <span class="ansigreen">def</span> run_forever<span class="ansiyellow">(</span>self<span class="ansiyellow">)</span><span class="ansiyellow">:</span><span class="ansiyellow"></span>
-
-<span class="ansired">RuntimeError</span>: Event loop is closed</pre>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>b&apos;\n&lt;!DOCTYPE HTML PUBL&apos; http://www.numpy.org
+b&apos;&lt;!DOCTYPE HTML&gt;\n\n&lt;HT&apos; http://www.scipy.org
+b&apos;&lt;HTML&gt;\n&lt;HEAD&gt;\n  &lt;TIT&apos; http://www.scikit-learn.org
+b&apos;&lt;!DOCTYPE HTML PUBLI&apos; http://pandas.pydata.org
+Elapsed time: 0.332597017288208
+</pre>
 </div>
 </div>
 
@@ -1053,7 +1034,7 @@ Elapsed time: 0.4711124897003174
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Thanks-for-your-attention">Thanks for your attention<a class="anchor-link" href="#Thanks-for-your-attention">&#182;</a></h1><p><img src="gfx/bot_waves.png" alt="Bot waves"></p>
+<h1 id="Thanks-for-your-attention">Thanks for your attention<a class="anchor-link" href="#Thanks-for-your-attention">&#182;</a></h1><p><img src="gfx/bot_waves.png" alt="bot"></p>
 
 </div>
 </div>
@@ -1067,6 +1048,7 @@ Elapsed time: 0.4711124897003174
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Credits">Credits<a class="anchor-link" href="#Credits">&#182;</a></h1><ul>
+<li>Thanks to Tom Dryer for some explanations about hangups</li>
 <li>OAuth2 webflow diagram was created and <a href="https://developers.google.com/readme/policies/">shared by Google</a> and used according to terms described in the <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons 3.0 Attribution License</a>. The image was scaled and white changed to alpha.</li>
 </ul>
 
