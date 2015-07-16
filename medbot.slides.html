@@ -214,7 +214,22 @@ div.output_prompt {
 <body>
 <div class="reveal">
 <div class="slides">
-<section>
+<div style=display:none>
+    <script type="text/javascript">
+function hideElements(elements, start) {
+    for(var i = 0, length = elements.length; i < length;i++) {
+        if(i >= start) {
+            elements[i].style.display = "none";
+        }
+    }
+}
+var input_elements = document.getElementsByClassName('input');
+hideElements(input_elements, 0);
+var prompt_elements = document.getElementsByClassName('prompt');
+hideElements(prompt_elements, 0);
+</script>
+    </div></section>
+    </section><section>
     <section>
     
 <div class="cell border-box-sizing text_cell rendered">
@@ -271,81 +286,10 @@ div.output_prompt {
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Motivation">Motivation<a class="anchor-link" href="#Motivation">&#182;</a></h1><p>Learn about...</p>
 <ul>
-<li>the basics of chat protocols like XMPP</li>
 <li>the concepts of event-driven/asynchronous programming</li>
+<li>the basics of chat protocols like XMPP</li>
 <li>how to write a small Google App</li>
 <li>help a friend with diabetes</li>
-</ul>
-
-</div>
-</div>
-</div></section>
-    </section><section>
-    <section>
-    
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="XMPP">XMPP<a class="anchor-link" href="#XMPP">&#182;</a></h1><ul>
-<li>Extensible Messaging and Presence Protocol based on XML</li>
-<li>developed by the Jabber open-source community in 1999 for near real-time instant messaging</li>
-<li>GTalk is based on XMPP but Hangout switched to a proprietary protocol</li>
-<li>Facebook provided an XMPP API until May, 2015</li>
-<li>AIM limited XMPP support</li>
-</ul>
-
-</div>
-</div>
-</div></section><section>
-    
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="SleekXMPP">SleekXMPP<a class="anchor-link" href="#SleekXMPP">&#182;</a></h1><ul>
-<li>MIT licensed XMPP library</li>
-<li>Python 2.6/3.1+</li>
-<li>Featured in the O'Reilly book <a href="http://shop.oreilly.com/product/9780596521271.do">XMPP: The Definitive Guide</a> by Kevin Smith, Remko Tronçon, and Peter Saint-Andre</li>
-<li><strong>Design goals:</strong> low number of dependencies, every XEP as a plugin and rewarding to work with</li>
-</ul>
-
-</div>
-</div>
-</div></section>
-    </section><section>
-    <section>
-    
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Google-Hangouts-protocol">Google Hangouts protocol<a class="anchor-link" href="#Google-Hangouts-protocol">&#182;</a></h1><ul>
-<li>replaces Google Talk, Google+ Messenger and the Google+ video chat system</li>
-<li>proprietary protocol, cannot be integrated with multi-chat clients like Pidgin or Adium</li>
-<li>Some more features like photo messages and share location</li>
-<li>Python library: <a href="https://github.com/tdryer/hangups">hangups</a></li>
-</ul>
-
-</div>
-</div>
-</div></section><section>
-    
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Hangups">Hangups<a class="anchor-link" href="#Hangups">&#182;</a></h1><ul>
-<li>by Tom Dryer, MIT licensed</li>
-<li>reverse-engineered the Hangouts protocol</li>
-<li>provides a basic command-line chatting client</li>
-<li>supports OAuth2 authentication as "iOS device"</li>
-<li>quite active, already some bots use it</li>
-<li><a href="https://github.com/tdryer/hangups">https://github.com/tdryer/hangups</a></li>
 </ul>
 
 </div>
@@ -364,7 +308,7 @@ div.output_prompt {
 
 </div>
 </div>
-</div><div class="fragment" data-fragment-index="9">
+</div><div class="fragment" data-fragment-index="6">
     
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -392,7 +336,7 @@ div.output_prompt {
 
 </div>
 </div>
-</div><div class="fragment" data-fragment-index="11">
+</div><div class="fragment" data-fragment-index="8">
     
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -484,7 +428,7 @@ div.output_prompt {
 
 </div>
 </div>
-</div><div class="fragment" data-fragment-index="18">
+</div><div class="fragment" data-fragment-index="15">
     
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -536,7 +480,7 @@ Elapsed time: 1.3736803531646729
 
 </div>
 </div>
-</div><div class="fragment" data-fragment-index="20">
+</div><div class="fragment" data-fragment-index="17">
     
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -599,7 +543,7 @@ Elapsed time: 0.5780215263366699
 
 </div>
 </div>
-</div><div class="fragment" data-fragment-index="22">
+</div><div class="fragment" data-fragment-index="19">
     
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -635,18 +579,12 @@ Elapsed time: 0.5780215263366699
 </div>
 
 </div>
-    </div><div style=display:none>
-    
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Elapsed time: 0.423393964767</p>
-
-</div>
-</div>
-</div>
+    </div><div class="fragment" data-fragment-index="20">
+    b'\n<!DOCTYPE HTML PUBL' http://www.numpy.org
+b'<HTML>\n<HEAD>\n  <TIT' http://www.scikit-learn.org
+b'<!DOCTYPE HTML>\n\n<HT' http://www.scipy.org
+b'<!DOCTYPE HTML PUBLI' http://pandas.pydata.org
+Elapsed time: 0.423393964767
     </div></section><section>
     
 <div class="cell border-box-sizing text_cell rendered">
@@ -670,7 +608,7 @@ Elapsed time: 0.5780215263366699
 
 </div>
 </div>
-</div><div class="fragment" data-fragment-index="26">
+</div><div class="fragment" data-fragment-index="23">
     
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -721,7 +659,9 @@ Elapsed time: 0.332597017288208
 </div>
 
 </div>
-    </div></section><section>
+    </div></section>
+    </section><section>
+    <section>
     
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -756,8 +696,75 @@ Elapsed time: 0.332597017288208
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="XMPP">XMPP<a class="anchor-link" href="#XMPP">&#182;</a></h1><ul>
+<li>Extensible Messaging and Presence Protocol based on XML</li>
+<li>developed by the Jabber open-source community in 1999 for near real-time instant messaging</li>
+<li>GTalk is based on XMPP but Hangout switched to a proprietary protocol</li>
+<li>Facebook provided an XMPP API until May, 2015</li>
+<li>AIM limited XMPP support</li>
+</ul>
+
+</div>
+</div>
+</div></section><section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="SleekXMPP">SleekXMPP<a class="anchor-link" href="#SleekXMPP">&#182;</a></h1><ul>
+<li>MIT licensed XMPP library</li>
+<li>Python 2.6/3.1+</li>
+<li>Featured in the O'Reilly book <a href="http://shop.oreilly.com/product/9780596521271.do">XMPP: The Definitive Guide</a> by Kevin Smith, Remko Tronçon, and Peter Saint-Andre</li>
+<li><strong>Design goals:</strong> low number of dependencies, every XEP as a plugin and rewarding to work with</li>
+</ul>
+
+</div>
+</div>
+</div></section><section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Google-Hangouts-protocol">Google Hangouts protocol<a class="anchor-link" href="#Google-Hangouts-protocol">&#182;</a></h1><ul>
+<li>replaces Google Talk, Google+ Messenger and the Google+ video chat system</li>
+<li>proprietary protocol, cannot be integrated with multi-chat clients like Pidgin or Adium</li>
+<li>Some more features like photo messages and share location</li>
+<li>Python library: <a href="https://github.com/tdryer/hangups">hangups</a></li>
+</ul>
+
+</div>
+</div>
+</div></section><section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Hangups">Hangups<a class="anchor-link" href="#Hangups">&#182;</a></h1><ul>
+<li>by Tom Dryer, MIT licensed</li>
+<li>reverse-engineered the Hangouts protocol</li>
+<li>provides a basic command-line chatting client</li>
+<li>supports OAuth2 authentication as "iOS device"</li>
+<li>quite active, already some bots use it</li>
+<li><a href="https://github.com/tdryer/hangups">https://github.com/tdryer/hangups</a></li>
+</ul>
+
+</div>
+</div>
+</div></section><section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Implementation">Implementation<a class="anchor-link" href="#Implementation">&#182;</a></h1><ul>
-<li>The implementation uses the concepts introduced above.</li>
+<li>The implementation uses the concepts of event-driven/asynchronous programming introduced above.</li>
 <li>Checkout <a href="https://github.com/blue-yonder/medbot/">https://github.com/blue-yonder/medbot/</a>.<ul>
 <li><strong>src/medbot_xmpp.py</strong> for an implementation using XMPP</li>
 <li><strong>src/medbot_asyncio.py</strong> for an implementation using ASYNCIO</li>
@@ -897,7 +904,7 @@ Elapsed time: 0.332597017288208
 
 </div>
 </div>
-</div><div class="fragment" data-fragment-index="40">
+</div><div class="fragment" data-fragment-index="41">
     
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -952,7 +959,7 @@ Elapsed time: 0.332597017288208
 
 </div>
 </div>
-</div><div class="fragment" data-fragment-index="44">
+</div><div class="fragment" data-fragment-index="45">
     
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -988,7 +995,7 @@ Elapsed time: 0.332597017288208
 </div>
 
 </div>
-    </div><div class="fragment" data-fragment-index="46">
+    </div><div class="fragment" data-fragment-index="47">
     
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -1054,8 +1061,7 @@ Elapsed time: 0.332597017288208
 
 </div>
 </div>
-</div></section>
-    </section>
+</div>
 </div>
 </div>
 
