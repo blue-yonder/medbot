@@ -1,0 +1,6 @@
+body:after {
+content: url(./gfx/blue-yonder-logo.png);
+position: fixed;
+bottom: 2em;
+left: 2.5em;
+}

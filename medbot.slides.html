@@ -480,14 +480,15 @@ div.output_prompt {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Single-threaded">Single-threaded<a class="anchor-link" href="#Single-threaded">&#182;</a></h1>
+<h1 id="Single-threaded">Single-threaded<a class="anchor-link" href="#Single-threaded">&#182;</a></h1><p>&#8203;</p>
+
 </div>
 </div>
 </div><div class="fragment" data-fragment-index="18">
     
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span class="kn">import</span> <span class="nn">urllib</span><span class="o">,</span> <span class="nn">time</span><span class="o">,</span> <span class="nn">hashlib</span>
@@ -511,11 +512,11 @@ div.output_prompt {
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>b&apos;&lt;HTML&gt;\n&lt;HEAD&gt;\n  &lt;TIT&apos;
-b&apos;\n&lt;!DOCTYPE HTML PUBL&apos;
-b&apos;&lt;!DOCTYPE HTML&gt;\n\n&lt;HT&apos;
-b&apos;&lt;!DOCTYPE HTML PUBLI&apos;
-Elapsed time: 1.2403321266174316
+<pre>b&apos;&lt;HTML&gt;\n&lt;HEAD&gt;\n  &lt;TIT&apos; http://www.scikit-learn.org
+b&apos;\n&lt;!DOCTYPE HTML PUBL&apos; http://www.numpy.org
+b&apos;&lt;!DOCTYPE HTML&gt;\n\n&lt;HT&apos; http://www.scipy.org
+b&apos;&lt;!DOCTYPE HTML PUBLI&apos; http://pandas.pydata.org
+Elapsed time: 1.2799851894378662
 </pre>
 </div>
 </div>
@@ -531,7 +532,8 @@ Elapsed time: 1.2403321266174316
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Multi-threaded">Multi-threaded<a class="anchor-link" href="#Multi-threaded">&#182;</a></h1>
+<h1 id="Multi-threaded">Multi-threaded<a class="anchor-link" href="#Multi-threaded">&#182;</a></h1><p>&#8203;</p>
+
 </div>
 </div>
 </div><div class="fragment" data-fragment-index="20">
@@ -593,7 +595,8 @@ Elapsed time: 0.4711124897003174
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Asynchronous">Asynchronous<a class="anchor-link" href="#Asynchronous">&#182;</a></h1>
+<h1 id="Asynchronous">Asynchronous<a class="anchor-link" href="#Asynchronous">&#182;</a></h1><p>&#8203;</p>
+
 </div>
 </div>
 </div><div class="fragment" data-fragment-index="22">
@@ -644,8 +647,101 @@ Elapsed time: 0.4711124897003174
 </div>
 </div>
 </div>
-    </div><div class="fragment" data-fragment-index="22">
-        
+    </div></section><section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Some-thoughts-about-callbacks">Some thoughts about callbacks<a class="anchor-link" href="#Some-thoughts-about-callbacks">&#182;</a></h1><blockquote><p>It requires super human descipline to write readable code in callbacks and if you don't believe me look at any piece of JavaScript code - <strong>Guido van Rossum</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div></section><section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Asynchronous">Asynchronous<a class="anchor-link" href="#Asynchronous">&#182;</a></h1><p>&#8203;</p>
+
+</div>
+</div>
+</div><div class="fragment" data-fragment-index="26">
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">aiohttp</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="nd">@asyncio</span><span class="o">.</span><span class="n">coroutine</span>
+<span class="k">def</span> <span class="nf">print_page</span><span class="p">(</span><span class="n">host</span><span class="p">):</span>
+       <span class="n">response</span> <span class="o">=</span> <span class="k">yield from</span> <span class="n">aiohttp</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">&#39;GET&#39;</span><span class="p">,</span> <span class="n">host</span><span class="p">)</span>
+       <span class="n">page</span> <span class="o">=</span> <span class="k">yield from</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+       <span class="nb">print</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">upper</span><span class="p">()[:</span><span class="mi">20</span><span class="p">],</span> <span class="n">host</span><span class="p">)</span>
+
+<span class="n">tasks</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">hosts</span><span class="p">:</span>
+  <span class="n">tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">print_page</span><span class="p">(</span><span class="n">host</span><span class="p">))</span>
+
+<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+<span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">tasks</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s">&quot;Elapsed time: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansired">---------------------------------------------------------------------------</span>
+<span class="ansired">RuntimeError</span>                              Traceback (most recent call last)
+<span class="ansigreen">&lt;ipython-input-11-42cfeaadf551&gt;</span> in <span class="ansicyan">&lt;module&gt;</span><span class="ansiblue">()</span>
+<span class="ansigreen">     15</span> <span class="ansiyellow"></span>
+<span class="ansigreen">     16</span> loop <span class="ansiyellow">=</span> asyncio<span class="ansiyellow">.</span>get_event_loop<span class="ansiyellow">(</span><span class="ansiyellow">)</span><span class="ansiyellow"></span>
+<span class="ansigreen">---&gt; 17</span><span class="ansiyellow"> </span>loop<span class="ansiyellow">.</span>run_until_complete<span class="ansiyellow">(</span>asyncio<span class="ansiyellow">.</span>wait<span class="ansiyellow">(</span>tasks<span class="ansiyellow">)</span><span class="ansiyellow">)</span><span class="ansiyellow"></span>
+<span class="ansigreen">     18</span> <span class="ansiyellow"></span>
+<span class="ansigreen">     19</span> print<span class="ansiyellow">(</span><span class="ansiblue">&quot;Elapsed time: {}&quot;</span><span class="ansiyellow">.</span>format<span class="ansiyellow">(</span>time<span class="ansiyellow">.</span>time<span class="ansiyellow">(</span><span class="ansiyellow">)</span> <span class="ansiyellow">-</span> start<span class="ansiyellow">)</span><span class="ansiyellow">)</span><span class="ansiyellow"></span>
+
+<span class="ansigreen">/usr/lib64/python3.4/asyncio/base_events.py</span> in <span class="ansicyan">run_until_complete</span><span class="ansiblue">(self, future)</span>
+<span class="ansigreen">    251</span>         Return the Future<span class="ansired">&apos;</span>s result<span class="ansiyellow">,</span> <span class="ansigreen">or</span> <span class="ansigreen">raise</span> its exception<span class="ansiyellow">.</span><span class="ansiyellow"></span>
+<span class="ansigreen">    252</span>         &quot;&quot;&quot;
+<span class="ansigreen">--&gt; 253</span><span class="ansiyellow">         </span>self<span class="ansiyellow">.</span>_check_closed<span class="ansiyellow">(</span><span class="ansiyellow">)</span><span class="ansiyellow"></span>
+<span class="ansigreen">    254</span> <span class="ansiyellow"></span>
+<span class="ansigreen">    255</span>         new_task <span class="ansiyellow">=</span> <span class="ansigreen">not</span> isinstance<span class="ansiyellow">(</span>future<span class="ansiyellow">,</span> futures<span class="ansiyellow">.</span>Future<span class="ansiyellow">)</span><span class="ansiyellow"></span>
+
+<span class="ansigreen">/usr/lib64/python3.4/asyncio/base_events.py</span> in <span class="ansicyan">_check_closed</span><span class="ansiblue">(self)</span>
+<span class="ansigreen">    223</span>     <span class="ansigreen">def</span> _check_closed<span class="ansiyellow">(</span>self<span class="ansiyellow">)</span><span class="ansiyellow">:</span><span class="ansiyellow"></span>
+<span class="ansigreen">    224</span>         <span class="ansigreen">if</span> self<span class="ansiyellow">.</span>_closed<span class="ansiyellow">:</span><span class="ansiyellow"></span>
+<span class="ansigreen">--&gt; 225</span><span class="ansiyellow">             </span><span class="ansigreen">raise</span> RuntimeError<span class="ansiyellow">(</span><span class="ansiblue">&apos;Event loop is closed&apos;</span><span class="ansiyellow">)</span><span class="ansiyellow"></span>
+<span class="ansigreen">    226</span> <span class="ansiyellow"></span>
+<span class="ansigreen">    227</span>     <span class="ansigreen">def</span> run_forever<span class="ansiyellow">(</span>self<span class="ansiyellow">)</span><span class="ansiyellow">:</span><span class="ansiyellow"></span>
+
+<span class="ansired">RuntimeError</span>: Event loop is closed</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    </div></section><section>
+    
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -661,46 +757,36 @@ Elapsed time: 0.4711124897003174
 
 </div>
 </div>
-</div>
-        </div></section><section>
+</div></section><section>
     
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="gfx/state_machine.png" alt="state_machine"></p>
+<h1 id="State-machine">State machine<a class="anchor-link" href="#State-machine">&#182;</a></h1><p><img src="gfx/state_machine.png" alt="state_machine"></p>
 
 </div>
 </div>
 </div></section><section>
     
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre> 
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div><div class="fragment" data-fragment-index="22">
-        
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<blockquote><p>It requires super human descipline to write readable code in callback and if you don't believe me look at any piece of JavaScript code - <strong>Guido van Rossum</strong></p>
-</blockquote>
+<h1 id="Implementation">Implementation<a class="anchor-link" href="#Implementation">&#182;</a></h1><ul>
+<li>The implementation uses the concepts introduced above.</li>
+<li>Checkout <a href="https://github.com/blue-yonder/medbot/">https://github.com/blue-yonder/medbot/</a>.<ul>
+<li><strong>src/medbot_xmpp.py</strong> for an implementation using XMPP</li>
+<li><strong>src/medbot_asyncio.py</strong> for an implementation using ASYNCIO</li>
+</ul>
+</li>
+</ul>
 
 </div>
 </div>
-</div>
-        </div></section>
+</div></section>
     </section><section>
     <section>
     
@@ -830,7 +916,7 @@ Elapsed time: 0.4711124897003174
 
 </div>
 </div>
-</div><div class="fragment" data-fragment-index="38">
+</div><div class="fragment" data-fragment-index="40">
     
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -885,7 +971,7 @@ Elapsed time: 0.4711124897003174
 
 </div>
 </div>
-</div><div class="fragment" data-fragment-index="42">
+</div><div class="fragment" data-fragment-index="44">
     
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -921,7 +1007,7 @@ Elapsed time: 0.4711124897003174
 </div>
 
 </div>
-    </div><div class="fragment" data-fragment-index="44">
+    </div><div class="fragment" data-fragment-index="46">
     
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
