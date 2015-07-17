@@ -27,7 +27,6 @@ class MedBot(object):
         self._user_list = None
         self._conv_list = None
         self._asked = False
-        self._pos_reply = False
 
     def run(self):
         self._client.on_connect.add_observer(self._on_connect)
@@ -88,7 +87,6 @@ class MedBot(object):
         is_positive = text.lower().startswith('yes')
         if from_recipient and is_positive and self._asked:
             _logger.info("Positive reply received")
-            self._pos_reply = True
             self._asked = False
             yield from self._send_message(conv, "That's great!")
 
@@ -108,18 +106,17 @@ class MedBot(object):
     def send_alarm(self):
         _logger.info('Sending reminder...')
         msg = 'Hey buddy, did you take your insulin?'
-        self._pos_reply = False
         conv = self._get_conv_with_recipient()
         yield from self._send_message(conv, msg)
         self._asked = True
         repeat_timeout = 60*20
         yield from asyncio.sleep(repeat_timeout)
         for _ in range(3):
-            if self._pos_reply: break
+            if not self._asked: break
             yield from self._send_message(conv, 'How about now?')
             yield from asyncio.sleep(repeat_timeout)
         else:
-            if not self._pos_reply:
+            if self._asked:
                 yield from self._send_message(conv, "I'm giving up!")
         wait_time = self._get_secs_to_next_alarm()
         loop = asyncio.get_event_loop()
@@ -138,6 +135,6 @@ if __name__ == '__main__':
 
     cookies = get_auth_stdin('my_refresh_token.txt')
     client = hangups.Client(cookies)
-    bot = MedBot(client, "Florian Wilhelm")
+    bot = MedBot(client, "Buddy")
     _logger.info("Starting bot...")
     bot.run()
