@@ -324,23 +324,6 @@ div.output_prompt {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="When-to-use-asynchronous-event-driven-programming?">When to use asynchronous event-driven programming?<a class="anchor-link" href="#When-to-use-asynchronous-event-driven-programming?">&#182;</a></h1><ul>
-<li>if you have many tasks</li>
-<li>your tasks are largely independent (no much inter-communication)</li>
-<li>some tasks block while waiting for I/O, events...</li>
-<li>your tasks share mutable data (that would need to be synced)</li>
-</ul>
-<p>Escpecially <em>network applications</em> and <em>user interfaces</em> have exactly these properties</p>
-
-</div>
-</div>
-</div></section><section>
-    
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <p><img src="gfx/asynchronous_st.png" alt="single threaded"></p>
 
 </div>
@@ -364,6 +347,23 @@ div.output_prompt {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><img src="gfx/asynchronous_async.png" alt="asynchronous"></p>
+
+</div>
+</div>
+</div></section><section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="When-to-use-asynchronous-event-driven-programming?">When to use asynchronous event-driven programming?<a class="anchor-link" href="#When-to-use-asynchronous-event-driven-programming?">&#182;</a></h1><ul>
+<li>if you have many tasks</li>
+<li>your tasks are largely independent (no much inter-communication)</li>
+<li>some tasks block while waiting for I/O, events...</li>
+<li>your tasks share mutable data (that would need to be synced)</li>
+</ul>
+<p>Escpecially <em>network applications</em> and <em>user interfaces</em> have exactly these properties</p>
 
 </div>
 </div>
@@ -670,121 +670,6 @@ Elapsed time: 0.332597017288208
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Setting-up-the-event-loop">Setting up the event loop<a class="anchor-link" href="#Setting-up-the-event-loop">&#182;</a></h2>
-</div>
-</div>
-</div><div class="fragment" data-fragment-index="24">
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">on_connect</span><span class="o">.</span><span class="n">add_observer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_on_connect</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">on_disconnect</span><span class="o">.</span><span class="n">add_observer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_on_disconnect</span><span class="p">)</span>
-    <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
-    <span class="c"># Set alarm</span>
-    <span class="n">wait_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_secs_to_next_alarm</span><span class="p">()</span>
-    <span class="n">loop</span><span class="o">.</span><span class="n">call_later</span><span class="p">(</span><span class="n">wait_time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_alarm</span><span class="p">)</span>
-    <span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">connect</span><span class="p">())</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-    </div></section><section>
-    
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Sending-the-alarm">Sending the alarm<a class="anchor-link" href="#Sending-the-alarm">&#182;</a></h2>
-</div>
-</div>
-</div><div class="fragment" data-fragment-index="26">
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="nd">@asyncio</span><span class="o">.</span><span class="n">coroutine</span>
-<span class="k">def</span> <span class="nf">send_alarm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Sending reminder...&#39;</span><span class="p">)</span>
-    <span class="n">msg</span> <span class="o">=</span> <span class="s">&#39;Hey buddy, did you take your insulin?&#39;</span>
-    <span class="n">conv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_conv_with_recipient</span><span class="p">()</span>
-    <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="n">conv</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_asked</span> <span class="o">=</span> <span class="k">True</span>
-    <span class="n">repeat_timeout</span> <span class="o">=</span> <span class="mi">60</span><span class="o">*</span><span class="mi">1</span>
-    <span class="k">yield from</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">repeat_timeout</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_asked</span><span class="p">:</span> <span class="k">break</span>
-        <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="n">conv</span><span class="p">,</span> <span class="s">&#39;How about now?&#39;</span><span class="p">)</span>
-        <span class="k">yield from</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">repeat_timeout</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_asked</span><span class="p">:</span>
-            <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="n">conv</span><span class="p">,</span> <span class="s">&quot;I&#39;m giving up!&quot;</span><span class="p">)</span>
-    <span class="n">wait_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_secs_to_next_alarm</span><span class="p">()</span>
-    <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
-    <span class="n">loop</span><span class="o">.</span><span class="n">call_later</span><span class="p">(</span><span class="n">wait_time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_alarm</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_asked</span> <span class="o">=</span> <span class="k">False</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-    </div></section><section>
-    
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Handling-a-message">Handling a message<a class="anchor-link" href="#Handling-a-message">&#182;</a></h2>
-</div>
-</div>
-</div><div class="fragment" data-fragment-index="28">
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="nd">@asyncio</span><span class="o">.</span><span class="n">coroutine</span>
-<span class="k">def</span> <span class="nf">_on_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">conv_event</span><span class="p">):</span>
-    <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Message received...&quot;</span><span class="p">)</span>
-    <span class="n">conv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_conv_list</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">conv_event</span><span class="o">.</span><span class="n">conversation_id</span><span class="p">)</span>
-    <span class="n">user</span> <span class="o">=</span> <span class="n">conv</span><span class="o">.</span><span class="n">get_user</span><span class="p">(</span><span class="n">conv_event</span><span class="o">.</span><span class="n">user_id</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">conv_event</span><span class="p">,</span> <span class="n">hangups</span><span class="o">.</span><span class="n">ChatMessageEvent</span><span class="p">):</span>
-        <span class="n">text</span> <span class="o">=</span> <span class="n">conv_event</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">text</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
-    <span class="n">from_recipient</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_recipient_id</span> <span class="o">==</span> <span class="n">user</span><span class="o">.</span><span class="n">id_</span>
-    <span class="n">is_positive</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;yes&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">from_recipient</span> <span class="ow">and</span> <span class="n">is_positive</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_asked</span><span class="p">:</span>
-        <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Positive reply received&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_asked</span> <span class="o">=</span> <span class="k">False</span>
-        <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="n">conv</span><span class="p">,</span> <span class="s">&quot;That&#39;s great!&quot;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-    </div></section><section>
-    
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="XMPP">XMPP<a class="anchor-link" href="#XMPP">&#182;</a></h1><ul>
 <li>Extensible Messaging and Presence Protocol based on XML</li>
 <li>developed by the Jabber open-source community in 1999 for near real-time instant messaging</li>
@@ -863,7 +748,122 @@ Elapsed time: 0.332597017288208
 
 </div>
 </div>
-</div></section>
+</div></section><section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Setting-up-the-event-loop">Setting up the event loop<a class="anchor-link" href="#Setting-up-the-event-loop">&#182;</a></h2>
+</div>
+</div>
+</div><div class="fragment" data-fragment-index="29">
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">on_connect</span><span class="o">.</span><span class="n">add_observer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_on_connect</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">on_disconnect</span><span class="o">.</span><span class="n">add_observer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_on_disconnect</span><span class="p">)</span>
+    <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+    <span class="c"># Set alarm</span>
+    <span class="n">wait_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_secs_to_next_alarm</span><span class="p">()</span>
+    <span class="n">loop</span><span class="o">.</span><span class="n">call_later</span><span class="p">(</span><span class="n">wait_time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_alarm</span><span class="p">)</span>
+    <span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">connect</span><span class="p">())</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+    </div></section><section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Sending-the-alarm">Sending the alarm<a class="anchor-link" href="#Sending-the-alarm">&#182;</a></h2>
+</div>
+</div>
+</div><div class="fragment" data-fragment-index="31">
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="nd">@asyncio</span><span class="o">.</span><span class="n">coroutine</span>
+<span class="k">def</span> <span class="nf">send_alarm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Sending reminder...&#39;</span><span class="p">)</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s">&#39;Hey buddy, did you take your insulin?&#39;</span>
+    <span class="n">conv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_conv_with_recipient</span><span class="p">()</span>
+    <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="n">conv</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_asked</span> <span class="o">=</span> <span class="k">True</span>
+    <span class="n">repeat_timeout</span> <span class="o">=</span> <span class="mi">60</span><span class="o">*</span><span class="mi">20</span>
+    <span class="k">yield from</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">repeat_timeout</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_asked</span><span class="p">:</span> <span class="k">break</span>
+        <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="n">conv</span><span class="p">,</span> <span class="s">&#39;How about now?&#39;</span><span class="p">)</span>
+        <span class="k">yield from</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">repeat_timeout</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_asked</span><span class="p">:</span>
+            <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="n">conv</span><span class="p">,</span> <span class="s">&quot;I&#39;m giving up!&quot;</span><span class="p">)</span>
+    <span class="n">wait_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_secs_to_next_alarm</span><span class="p">()</span>
+    <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+    <span class="n">loop</span><span class="o">.</span><span class="n">call_later</span><span class="p">(</span><span class="n">wait_time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_alarm</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_asked</span> <span class="o">=</span> <span class="k">False</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+    </div></section><section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Handling-a-message">Handling a message<a class="anchor-link" href="#Handling-a-message">&#182;</a></h2>
+</div>
+</div>
+</div><div class="fragment" data-fragment-index="33">
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="nd">@asyncio</span><span class="o">.</span><span class="n">coroutine</span>
+<span class="k">def</span> <span class="nf">_on_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">conv_event</span><span class="p">):</span>
+    <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Message received...&quot;</span><span class="p">)</span>
+    <span class="n">conv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_conv_list</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">conv_event</span><span class="o">.</span><span class="n">conversation_id</span><span class="p">)</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">conv</span><span class="o">.</span><span class="n">get_user</span><span class="p">(</span><span class="n">conv_event</span><span class="o">.</span><span class="n">user_id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">conv_event</span><span class="p">,</span> <span class="n">hangups</span><span class="o">.</span><span class="n">ChatMessageEvent</span><span class="p">):</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">conv_event</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+    <span class="n">from_recipient</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_recipient_id</span> <span class="o">==</span> <span class="n">user</span><span class="o">.</span><span class="n">id_</span>
+    <span class="n">is_positive</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;yes&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">from_recipient</span> <span class="ow">and</span> <span class="n">is_positive</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_asked</span><span class="p">:</span>
+        <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Positive reply received&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_asked</span> <span class="o">=</span> <span class="k">False</span>
+        <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_message</span><span class="p">(</span><span class="n">conv</span><span class="p">,</span> <span class="s">&quot;That&#39;s great!&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+    </div></section>
     </section><section>
     <section>
     
@@ -893,6 +893,17 @@ Elapsed time: 0.332597017288208
 
 </div>
 </div>
+</div></section><section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="gfx/authentication.png" alt="Authentication"></p>
+
+</div>
+</div>
 </div></section>
     </section><section>
     <section>
@@ -913,7 +924,11 @@ Elapsed time: 0.332597017288208
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Thanks-for-your-attention">Thanks for your attention<a class="anchor-link" href="#Thanks-for-your-attention">&#182;</a></h1><p><img src="gfx/bot_waves.png" alt="bot"></p>
+<h1 id="Credits">Credits<a class="anchor-link" href="#Credits">&#182;</a></h1><ul>
+<li>Thanks to Tom Dryer for some explanations about hangups.</li>
+<li>OAuth2 webflow diagram was created and <a href="https://developers.google.com/readme/policies/">shared by Google</a> and used according to terms described in the <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons 3.0 Attribution License</a>. The image was scaled and white changed to alpha.</li>
+<li>Bot was taken from <a href="https://pixabay.com/en/android-robotics-machine-robot-150996/">pixabay</a>, <a href="https://pixabay.com/en/service/terms/#download_terms">Creative Commons CC0</a></li>
+</ul>
 
 </div>
 </div>
@@ -924,11 +939,7 @@ Elapsed time: 0.332597017288208
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Credits">Credits<a class="anchor-link" href="#Credits">&#182;</a></h1><ul>
-<li>Thanks to Tom Dryer for some explanations about hangups.</li>
-<li>OAuth2 webflow diagram was created and <a href="https://developers.google.com/readme/policies/">shared by Google</a> and used according to terms described in the <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons 3.0 Attribution License</a>. The image was scaled and white changed to alpha.</li>
-<li>Bot was taken from <a href="https://pixabay.com/en/android-robotics-machine-robot-150996/">pixabay</a>, <a href="https://pixabay.com/en/service/terms/#download_terms">Creative Commons CC0</a></li>
-</ul>
+<h1 id="Thanks-for-your-attention">Thanks for your attention<a class="anchor-link" href="#Thanks-for-your-attention">&#182;</a></h1><p><img src="gfx/bot_waves.png" alt="bot"></p>
 
 </div>
 </div>
